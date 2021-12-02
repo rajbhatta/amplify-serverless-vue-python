@@ -1,9 +1,11 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <div id="nav" class="container mx-auto"> <!-- start of upper nav container -->
+    <div class="box-border  border-4"> <!--start of box-border -->
+      <router-link to="/">Dashboard</router-link> |
+      <router-link to="/add">AddSensor</router-link>
+    </div> <!-- end of box-border -->
+  </div> <!-- end of upper nav container -->
+  <router-view />
 </template>
 
 <style>
