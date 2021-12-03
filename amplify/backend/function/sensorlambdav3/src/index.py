@@ -21,22 +21,26 @@ logger = logging.getLogger()
 @app.route(BASE_ROUTE, methods=['POST'])
 def create_customer():
     try:
+        """
+            PRODUCTION REQUEST VALUE
+        """
         request_json = request.get_json()
-        #request_hex_id = request_json.get('hexid')
-        #request_name = request_json.get('name')
-        #request_temperature = request_json.get('temperature')
-        #request_location = request_json.get('location')
+        request_hex_id = request_json.get('hexid')
+        request_name = request_json.get('name')
+        request_temperature = request_json.get('temperature')
+        request_location = request_json.get('location')
 
-        request_hex_id = '0x123'
-        request_name = 'test name'
-        request_temperature = 15
-        request_location = 'Surrey'
+        """
+            LOCAL TESTING
+        """
+        #request_hex_id = '0x123'
+        #request_name = 'test name'
+        #request_temperature = 15
+        #request_location = 'Surrey'
     
-        db_handler = DbHandler(logger)
-        db_session = db_handler.get_orm_db_session();
-
+        db_session = provide_database_session()
         sensor_service = SensorService(db_session)
-        sensor_service.save_sensor(Sensor(name=request_name,hexid=request_hex_id,temperature=request_temperature, operating_location =request_location))
+        sensor_service.save_sensor(Sensor(name=request_name,hexid=request_hex_id,temperature=request_temperature, location =request_location))
     
         return jsonify(message='OK')
     except error as e:
@@ -46,8 +50,7 @@ def create_customer():
 
 @app.route(BASE_ROUTE, methods=['GET'])
 def list_customer():
-    db_handler = DbHandler(logger)
-    db_session = db_handler.get_orm_db_session();
+    db_session = provide_database_session();
 
     # todo make list to json
     sensor_list =[]
@@ -58,8 +61,8 @@ def list_customer():
     return sensor_list
 
 def handler(event, context):
-  print('received event:')
-  print(event)
+  logger.info('received event:')
+  logger.info(event)
   return awsgi.response(app,event,context)
 
 def provide_database_session():
@@ -80,8 +83,8 @@ def provide_database_session():
     dbhost = validate_db_host('equipmentdb.cmqdxui4uot8.us-west-2.rds.amazonaws.com')
     dbname = validate_db_name('postgres')
 
-    dbhandler = DbHandler(logger)
-    return dbhandler.get_orm_db_session(dbusername, dbpassword, dbhost , dbname)
+    dbhandler = DbHandler(logger,dbusername, dbpassword, dbhost , dbname)
+    return dbhandler.get_orm_db_session()
 
 
 def validate_db_username(username):
