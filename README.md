@@ -62,6 +62,47 @@ amplify mock function sensorlambdav3
 # 7. API server flow design #
 <img src="Snapshots/api-design.png"/>
 
+# 8. Database Script #
+## 8.1 Database script for creating table ##
+```sql
+-- Table: public.sensor
+
+-- DROP TABLE public.sensor;
+
+CREATE TABLE public.sensor
+(
+    id bigint NOT NULL DEFAULT nextval('sensor_id_seq'::regclass),
+    hexid text COLLATE pg_catalog."default",
+    name text COLLATE pg_catalog."default",
+    temperature integer,
+    location text COLLATE pg_catalog."default",
+    CONSTRAINT sensor_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.sensor
+    OWNER to postgres;
+```
+
+## 8.2 Database script for creating primary key using sequence ##
+```sql
+-- SEQUENCE: public.sensor_id_seq
+
+-- DROP SEQUENCE public.sensor_id_seq;
+
+CREATE SEQUENCE public.sensor_id_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 2147483647
+    CACHE 1;
+
+ALTER SEQUENCE public.sensor_id_seq
+    OWNER TO postgres;
+```
+
+
 # 8. Snapshots #
 <img src="Snapshots/img1.png"/>
 <img src="Snapshots/img2.png"/>
