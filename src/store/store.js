@@ -16,16 +16,16 @@ export default createStore({
     }
   },
   actions: {
-    async submitsensor(sensor) {
+    async submitsensor({commit}, sensor) {
       try {
         const response = await postsensor(sensor)
-        this.commit("SAVE_SENSOR_INVOKED", response)
+        commit("SAVE_SENSOR_INVOKED", response)
       } catch (error) {
         /* todo: create exception handling class and pass this error */
         console.log(error)
       }
     },
-    async getsensors() {
+    async getsensors({commit}) {
       try {
         const response = await getsensor()
         this.state.sensors = [{
@@ -46,7 +46,7 @@ export default createStore({
           'location': 'richmond',
           'temperature': 14,
         }]
-        this.commit("GET_SENSOR_INVOKED", response)
+        commit("GET_SENSOR_INVOKED", response)
       } catch (error) {
         /* todo: create exception handling class and pass this error */
         console.log(error)

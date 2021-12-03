@@ -29,7 +29,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-equipmentapi-dev-01537-deployment/amplify-cfn-templates/function/sensorlambdav3-cloudformation-template.json",
         "logicalId": "functionsensorlambdav3"
       },
-      "lastPushTimeStamp": "2021-12-03T08:22:26.534Z",
+      "lastPushTimeStamp": "2021-12-03T08:41:09.319Z",
       "output": {
         "Region": "us-west-1",
         "Arn": "arn:aws:lambda:us-west-1:328587249661:function:sensorlambdav3-dev",
@@ -57,7 +57,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-equipmentapi-dev-01537-deployment/amplify-cfn-templates/api/equipmentapi-cloudformation-template.json",
         "logicalId": "apiequipmentapi"
       },
-      "lastPushTimeStamp": "2021-12-03T08:22:26.534Z",
+      "lastPushTimeStamp": "2021-12-03T08:41:09.322Z",
       "output": {
         "ApiName": "equipmentapi",
         "RootUrl": "https://cvsg7g3cud.execute-api.us-west-1.amazonaws.com/dev",

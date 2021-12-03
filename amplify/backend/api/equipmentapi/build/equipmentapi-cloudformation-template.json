@@ -1,5 +1,5 @@
 {
-  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"7.5.5\",\"stackType\":\"api-API Gateway\",\"metadata\":{}}",
+  "Description": "API Gateway Resource for AWS Amplify CLI",
   "AWSTemplateFormatVersion": "2010-09-09",
   "Parameters": {
     "functionsensorlambdav3Name": {
