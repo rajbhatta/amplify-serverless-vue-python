@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/sensorsv2": {
+      "name": "/sensorsv2",
+      "lambdaFunction": "sensorlambdav2",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

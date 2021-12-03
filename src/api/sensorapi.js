@@ -5,7 +5,7 @@ const getsensorbyid = (id) => {
     console.log('SENSOR ID IS RECEIVED')
 }
 const postsensor = (sensor) =>{
-    var response = API.post("sensorapi", "/sensors", {
+    var response = API.post("sensorapiv2", "/sensorsv2", {
         body: {
           sensor_name: 'Heat Sens',
           model: 'HT',
@@ -13,7 +13,7 @@ const postsensor = (sensor) =>{
           operating_location: 'Vancouver',
         },
       });
-      
+
     console.log(sensor)
     console.log(response)
     console.log('SENSOR IS RECEIVED')
