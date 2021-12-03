@@ -15,7 +15,7 @@
       "function": {
         "sensorlambdav3": {
           "deploymentBucketName": "amplify-equipmentapi-dev-01537-deployment",
-          "s3Key": "amplify-builds/sensorlambdav3-356a582f723661456b56-build.zip"
+          "s3Key": "amplify-builds/sensorlambdav3-77376657314353387571-build.zip"
         }
       }
     }
