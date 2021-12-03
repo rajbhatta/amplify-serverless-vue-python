@@ -1,12 +1,13 @@
+import { API } from "aws-amplify";
 
 const getsensorbyid = (id) => {
     console.log(id)
-    console.log('SENSOR ID IS RECEIVED')
 }
-const postsensor = (sensor) =>{
-    console.log(sensor)
-    console.log('SENSOR IS RECEIVED')
+const postsensor = (sensor) => {
+    API.post("equipmentapi", "/sensorsv3", {
+        body: sensor
+    })
 }
-const getsensor = () => {}
+const getsensor = () => API.get("equipmentapi", "/sensorsv3")
 
-export { getsensor,postsensor,getsensorbyid}
+export { getsensor, postsensor, getsensorbyid }
