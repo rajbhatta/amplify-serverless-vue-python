@@ -36,17 +36,33 @@ amplify push -y
 ```
 to make amplify available for UI
 
-# 5. Architecture diagrams #
-## 5.1 Current AWS cloud design ##
+# 5. Dependencies and virtual environment setup inside lambda function #
+```python
+pipenv install aws-wsgi boto3 flask flask-cors psycopg2-binary SQLAlchemy SQLAlchemy-serializer
+```
+
+## 5.2 How to install dependencies ##
+1. Go inside amplify folder (cd amplify)
+2. Goto function (cd function)
+3. Go inside sensorlambda (cd sensorlambda)
+4. Run dependencies specified inside 1
+
+## 5.3 How to mock lambda function with Amplify ##
+```python
+amplify mock function sensorlambdav3
+```
+
+# 6. Architecture diagrams #
+## 6.1 Current AWS cloud design ##
 <img src="Snapshots/current-design.png"/>
 
-## 5.2 Alternative AWS cloud design ##
+## 6.2 Alternative AWS cloud design ##
 <img src="Snapshots/alternative-design.png"/>
 
-# 6. API server flow design #
+# 7. API server flow design #
 <img src="Snapshots/api-design.png"/>
 
-# 7. Snapshots #
+# 8. Snapshots #
 <img src="Snapshots/img1.png"/>
 <img src="Snapshots/img2.png"/>
 
