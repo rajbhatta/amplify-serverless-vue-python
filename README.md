@@ -108,7 +108,7 @@ ALTER SEQUENCE public.sensor_id_seq
     OWNER TO postgres;
 ```
 
-## 8.3 Lambda function with Flask server and PostGres ##
+## 8.3 API server: Lambda function with Flask server and PostGres ##
 ```python
 
 4. amplify/backend/function/sensorlambdav3/src/index.py
@@ -352,7 +352,442 @@ python_version = "3.8"
 
 ```
 
-# 8. Snapshots #
+## 8.4 UI with Vuex and TailWindCss: ##
+```js
+
+7. src/api/sensorapi.js
+
+import { API } from "aws-amplify";
+
+const getsensorbyid = (id) => {
+    console.log(id)
+}
+const postsensor = (sensor) => {
+    API.post("equipmentapi", "/sensorsv3", {
+        body: sensor
+    })
+}
+const getsensor = () => API.get("equipmentapi", "/sensorsv3")
+
+export { getsensor, postsensor, getsensorbyid }
+```
+
+```js
+
+7. src/router/index.js
+
+import { createRouter, createWebHistory } from 'vue-router'
+import Dashboard from '../views/Dashboard.vue'
+
+const routes = [
+  {
+    path: '/',
+    name: 'Dashboard',
+    component: Dashboard
+  },
+  {
+    path: '/add',
+    name: 'Add',
+    component: () => import('../views/Add.vue')
+  },
+  {
+    path: '/sensors/:id',
+    name: 'Sensors',
+    
+    component: () => import('../views/Sensors.vue')
+  }
+]
+
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes
+})
+
+export default router
+
+```
+
+```js
+
+8. src/store/store.js
+
+import { createStore } from 'vuex'
+import { postsensor, getsensor } from '@/api/sensorapi'
+
+export default createStore({
+  state: {
+    sensors: []
+  },
+  mutations: {
+    SAVE_SENSOR_INVOKED(response) {
+      /* todo: write commit message here */
+      console.log(response)
+    },
+    GET_SENSOR_INVOKED(data) {
+       /* todo: write commit message here */
+      console.log(data)
+    }
+  },
+  actions: {
+    async submitsensor({commit}, sensor) {
+      try {
+        const response = await postsensor(sensor)
+        commit("SAVE_SENSOR_INVOKED", response)
+      } catch (error) {
+        /* todo: create exception handling class and pass this error */
+        console.log(error)
+      }
+    },
+    async getsensors({commit}) {
+      try {
+        const response = await getsensor()
+        this.state.sensors = response
+        commit("GET_SENSOR_INVOKED", response)
+      } catch (error) {
+        /* todo: create exception handling class and pass this error */
+        console.log(error)
+      }
+    }
+  }
+})
+
+
+```
+
+```html
+
+9. src/view/Dashboard.vue
+
+<template>
+  <!-- start of container setup -->
+  <div class="container mx-auto">
+    <div class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-18 md:pb-5">
+      <div class="flex flex-wrap">
+        <div class="w-full md:w-1/2 xl:w-1/3 p-6">
+          <!--Metric Card-->
+          <div
+            class="
+              bg-gradient-to-b
+              from-green-200
+              to-green-100
+              border-b-4 border-green-600
+              rounded-lg
+              shadow-xl
+              p-5
+            "
+          >
+            <div class="flex flex-row items-center">
+              <div class="flex-shrink pr-4">
+                <div class="rounded-full p-5 bg-green-600">
+                  <i class="fa fa-wallet fa-2x fa-inverse"></i>
+                </div>
+              </div>
+              <div class="flex-1 text-right md:text-center">
+                <h5 class="font-bold uppercase text-gray-600">
+                  Total Sensors Record Counts
+                </h5>
+                <h3 class="font-bold text-3xl">
+                  {{loadSensorInfo().length}}
+                  <span class="text-green-500"
+                    ><i class="fas fa-caret-up"></i
+                  ></span>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <!--/Metric Card-->
+        </div>
+        <div class="w-full md:w-1/2 xl:w-1/3 p-6">
+          <!--Metric Card-->
+          <div
+            class="
+              bg-gradient-to-b
+              from-pink-200
+              to-pink-100
+              border-b-4 border-pink-500
+              rounded-lg
+              shadow-xl
+              p-5
+            "
+          >
+            <div class="flex flex-row items-center">
+              <div class="flex-shrink pr-4">
+                <div class="rounded-full p-5 bg-pink-600">
+                  <i class="fas fa-users fa-2x fa-inverse"></i>
+                </div>
+              </div>
+              <div class="flex-1 text-right md:text-center">
+                <h5 class="font-bold uppercase text-gray-600">Total Sensors</h5>
+                <h3 class="font-bold text-3xl">
+                  {{loadSensorInfo().length}}
+                  <span class="text-pink-500"
+                    ><i class="fas fa-exchange-alt"></i
+                  ></span>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <!--/Metric Card-->
+        </div>
+        <div class="w-full md:w-1/2 xl:w-1/3 p-6">
+          <!--Metric Card-->
+          <div
+            class="
+              bg-gradient-to-b
+              from-yellow-200
+              to-yellow-100
+              border-b-4 border-yellow-600
+              rounded-lg
+              shadow-xl
+              p-5
+            "
+          >
+            <div class="flex flex-row items-center">
+              <div class="flex-shrink pr-4">
+                <div class="rounded-full p-5 bg-yellow-600">
+                  <i class="fas fa-user-plus fa-2x fa-inverse"></i>
+                </div>
+              </div>
+              <div class="flex-1 text-right md:text-center">
+                <h5 class="font-bold uppercase text-gray-600">
+                  Working Sensors
+                </h5>
+                <h3 class="font-bold text-3xl">
+                  2
+                  <span class="text-yellow-600"
+                    ><i class="fas fa-caret-up"></i
+                  ></span>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <!--/Metric Card-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end of container setup -->
+
+  <!-- start of table -->
+  <div class="container grid px-6 mx-auto">
+    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+      Sensor Details
+    </h2>
+
+    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+      <div class="w-full overflow-x-auto">
+        <table class="w-full whitespace-no-wrap">
+          <thead>
+            <tr
+              class="
+                text-xs
+                font-semibold
+                tracking-wide
+                text-left text-gray-500
+                uppercase
+                border-b
+                dark:border-gray-700
+                bg-gray-50
+                dark:bg-gray-800
+              "
+            >
+              <th class="px-4 py-3">Sensor ID</th>
+              <th class="px-4 py-3">Sensor Name</th>
+              <th class="px-4 py-3">Temperature (°C)</th>
+              <th class="px-4 py-3">Status</th>
+              <th class="px-4 py-3">Location</th>
+            </tr>
+          </thead>
+          <tbody
+            class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+          >
+            <tr class="text-gray-700 dark:text-gray-400" v-for="sensor in loadSensorInfo()" v-bind:key="sensor.hexid">
+              <td class="px-4 py-3">
+                <div class="flex items-center text-sm">
+                  <div>
+                    <p class="font-semibold">
+                      <router-link :to="'/sensors/' + 1"> {{sensor.hexid}} </router-link>
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3">
+                <div class="flex items-center text-sm">{{sensor.name}}</div>
+              </td>
+              <td class="px-4 py-3">
+                <div class="flex items-center text-sm">{{sensor.temperature}}</div>
+              </td>
+              <td class="px-4 py-3">
+                <div class="flex items-center text-sm">
+                  <span
+                    class="
+                      px-2
+                      py-1
+                      font-semibold
+                      leading-tight
+                      text-green-700
+                      bg-green-100
+                      rounded-full
+                      dark:text-green-100
+                    "
+                  >
+                    Working
+                  </span>
+                </div>
+              </td>
+
+              <td class="px-4 py-3">
+                <div class="flex items-center text-sm">{{sensor.location}}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- end of table -->
+</template>
+
+<script>
+import { mapActions} from "vuex";
+
+export default {
+  data() {
+    return {
+      
+    };
+  },
+  methods: {
+    ...mapActions(["getsensors"]),
+    loadSensorInfo(){
+      return this.$store.state.sensors;
+    }
+  },
+  async mounted() {
+    this.getsensors();
+  }
+};
+</script>
+
+```
+
+```html
+
+10. src/view/Add.vue
+
+<template>
+  <div class="container mx-auto grid">
+    <h4 class="mb-4 text-lg text-purple-800">Please Add Sensor</h4>
+
+    <div class="min-h-scree flex item-center justify-center">
+      <!--start of form -->
+      <div class="bg-white p-8 rounded shadow-2xl w-1/2">
+        <form class="space-y-10">
+          <div class="mb-3">
+            <label for="hexId" class="mr-2">HexId</label>
+            <input
+              type="text"
+              v-model="sensor.hexid"
+              class="
+                w-full
+                border-2 border-gray-400
+                p-3
+                rounded
+                outline-none
+                focus:border-blue-500
+              "
+              placeholder="Please enter sensor hex id.."
+            />
+          </div>
+          <div class="mb-3">
+            <label for="hexId" class="mr-2">Name</label>
+            <input
+              type="text"
+              v-model="sensor.name"
+              class="
+                w-full
+                border-2 border-gray-400
+                p-3
+                rounded
+                outline-none
+                focus:border-blue-500
+              "
+              placeholder="Please enter sensor name.."
+            />
+          </div>
+          <div class="mb-3">
+            <label for="hexId" class="mr-2">Location</label>
+            <input
+              type="text"
+              v-model="sensor.location"
+              class="
+                w-full
+                border-2 border-gray-400
+                p-3
+                rounded
+                outline-none
+                focus:border-blue-500
+              "
+              placeholder="Please enter sensor location.."
+            />
+          </div>
+          <div class="mb-3">
+            <label for="hexId" class="mr-2">Temperature</label>
+            <input
+              type="text"
+              v-model="sensor.temperature"
+              class="
+                w-full
+                border-2 border-gray-400
+                p-3
+                rounded
+                outline-none
+                focus:border-blue-500
+              "
+              placeholder="Please enter sensor temperature.."
+            />
+          </div>
+          <button
+            type="button"
+            class="block w-full bg-green-400 p-4 rounded"
+            v-on:Click="submitForm()"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <!-- end of form -->
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapActions} from "vuex";
+
+export default {
+  data() {
+    return {
+      sensor: {
+        hexid: "",
+        name: "",
+        location: "",
+        temperature: "",
+      },
+    };
+  },
+  methods: {
+    ...mapActions(["submitsensor", "getsensors"]),
+    submitForm() {
+      this.submitsensor(this.sensor);
+    },
+  }
+};
+</script>
+```
+
+
+
+# 9. Snapshots #
 <img src="Snapshots/img1.png"/>
 <img src="Snapshots/img2.png"/>
 
