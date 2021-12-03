@@ -15,7 +15,7 @@
       "function": {
         "sensorlambda": {
           "deploymentBucketName": "amplify-sensorapi-dev-181117-deployment",
-          "s3Key": "amplify-builds/sensorlambda-49596d4e32654b4d4f75-build.zip"
+          "s3Key": "amplify-builds/sensorlambda-63344a4b6d4179483430-build.zip"
         }
       }
     }

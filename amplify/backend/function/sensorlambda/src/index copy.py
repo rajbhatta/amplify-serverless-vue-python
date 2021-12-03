@@ -1,4 +1,6 @@
 
+from sensorservice import SensorService
+from dbhandler import DbHandler
 from modal.sensor import Sensor
 import awsgi
 import json
@@ -19,18 +21,17 @@ CORS(app)
 def create_customer():
     request_json = request.get_json()
     db_session = provide_database_session()
-    create(db_session,Sensor(sensor_name='test',model='test',temperature='19', operating_location ='langley'))
+    sensor_service = SensorService(db_session)
+    sensor_service.save_sensor(Sensor(sensor_name='test',model='test',temperature='19', operating_location ='langley'))
     return jsonify(message='POST is sucessful')
 
 @app.route(BASE_ROUTE, methods=['GET'])
 def list_customer():
-    return jsonify(message='GET is successful')
+    return jsonify(message ='GET is invoked')
 
 
 def handler(event, context):
-  print('received event:')
   print(event)
-  
   return awsgi.response(app,event,context)
 
 def provide_database_session():
@@ -40,11 +41,6 @@ def provide_database_session():
     dbhost = 'equipmentdb.cmqdxui4uot8.us-west-2.rds.amazonaws.com'
     dbname = 'postgres'
 
-    postgres_engine = create_engine(f'postgresql://{dbusername}:{dbpassword}@{dbhost}:5432/{dbname}')
-    session = sessionmaker(bind=postgres_engine)()
-    return session;
+    dbhandler = DbHandler()
+    return dbhandler.get_orm_db_session(dbusername, dbpassword, dbhost , dbname)
 
-def create(session, sensor):
-        session.add(sensor)
-        session.commit()
-        session.flush()
