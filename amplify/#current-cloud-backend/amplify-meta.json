@@ -17,27 +17,27 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
-      "lastBuildTimeStamp": "2021-12-03T09:27:08.412Z",
+      "lastBuildTimeStamp": "2021-12-03T10:25:09.969Z",
       "lastBuildType": "PROD",
-      "lastPackageTimeStamp": "2021-12-03T09:27:18.156Z",
-      "distZipFilename": "sensorlambdav3-77376657314353387571-build.zip",
+      "lastPackageTimeStamp": "2021-12-03T10:25:23.479Z",
+      "distZipFilename": "sensorlambdav3-366947344e397a2f6669-build.zip",
       "s3Bucket": {
         "deploymentBucketName": "amplify-equipmentapi-dev-01537-deployment",
-        "s3Key": "amplify-builds/sensorlambdav3-77376657314353387571-build.zip"
+        "s3Key": "amplify-builds/sensorlambdav3-366947344e397a2f6669-build.zip"
       },
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-equipmentapi-dev-01537-deployment/amplify-cfn-templates/function/sensorlambdav3-cloudformation-template.json",
         "logicalId": "functionsensorlambdav3"
       },
-      "lastPushTimeStamp": "2021-12-03T09:28:27.407Z",
+      "lastPushTimeStamp": "2021-12-03T10:26:31.952Z",
       "output": {
         "Region": "us-west-1",
         "Arn": "arn:aws:lambda:us-west-1:328587249661:function:sensorlambdav3-dev",
         "Name": "sensorlambdav3-dev",
         "LambdaExecutionRole": "equipmentapiLambdaRole1f56f018-dev"
       },
-      "lastPushDirHash": "wGF129cfUPXjRCKHGZ+u+bPsL9M=",
-      "lastDevBuildTimeStamp": "2021-12-03T09:22:37.686Z"
+      "lastPushDirHash": "xgZpnz5OMR0pa4o8NJaQdGXDiAE=",
+      "lastDevBuildTimeStamp": "2021-12-03T10:18:27.863Z"
     }
   },
   "api": {
@@ -58,7 +58,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-equipmentapi-dev-01537-deployment/amplify-cfn-templates/api/equipmentapi-cloudformation-template.json",
         "logicalId": "apiequipmentapi"
       },
-      "lastPushTimeStamp": "2021-12-03T09:28:27.378Z",
+      "lastPushTimeStamp": "2021-12-03T10:26:31.920Z",
       "output": {
         "ApiName": "equipmentapi",
         "RootUrl": "https://cvsg7g3cud.execute-api.us-west-1.amazonaws.com/dev",

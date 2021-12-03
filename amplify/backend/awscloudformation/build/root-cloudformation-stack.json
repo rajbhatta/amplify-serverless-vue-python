@@ -158,7 +158,7 @@
         "TemplateURL": "https://s3.amazonaws.com/amplify-equipmentapi-dev-01537-deployment/amplify-cfn-templates/function/sensorlambdav3-cloudformation-template.json",
         "Parameters": {
           "deploymentBucketName": "amplify-equipmentapi-dev-01537-deployment",
-          "s3Key": "amplify-builds/sensorlambdav3-77376657314353387571-build.zip",
+          "s3Key": "amplify-builds/sensorlambdav3-366947344e397a2f6669-build.zip",
           "env": "dev"
         }
       }

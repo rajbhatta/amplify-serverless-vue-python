@@ -1,1 +1,1 @@
-{ "httpMethod": "GET", "path":"/sensorsv3","queryStringParameters":""}
+{ "httpMethod": "POST", "path":"/sensorsv3","queryStringParameters":""}
