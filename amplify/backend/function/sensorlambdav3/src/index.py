@@ -6,6 +6,7 @@ import awsgi
 import json
 import logging
 from os import error
+import os
 
 from flask_cors import CORS
 from flask import Flask, app, jsonify, request
@@ -70,18 +71,18 @@ def provide_database_session():
     """ 
         PRODUCTION
     """
-    #dbusername = validate_db_username(os.environ.get("DB_USERNAME"))
-    #dbpassword = validate_db_password(os.environ.get("DB_PASSWORD"))
-    #dbhost = validate_db_host(os.environ.get("DB_HOST"))
-    #dbname = validate_db_name(os.environ.get("DB_NAME"))
+    dbusername = validate_db_username(os.environ.get("DB_USERNAME"))
+    dbpassword = validate_db_password(os.environ.get("DB_PASSWORD"))
+    dbhost = validate_db_host(os.environ.get("DB_HOST"))
+    dbname = validate_db_name(os.environ.get("DB_NAME"))
 
     """
         LOCAL TESTING
     """
-    dbusername = validate_db_username('postgres')
-    dbpassword = validate_db_password('admin123$')
-    dbhost = validate_db_host('equipmentdb.cmqdxui4uot8.us-west-2.rds.amazonaws.com')
-    dbname = validate_db_name('postgres')
+    #dbusername = validate_db_username('postgres')
+    #dbpassword = validate_db_password('<Password>')
+    #dbhost = validate_db_host('<I have terminated RDS>')
+    #dbname = validate_db_name('postgres')
 
     dbhandler = DbHandler(logger,dbusername, dbpassword, dbhost , dbname)
     return dbhandler.get_orm_db_session()
