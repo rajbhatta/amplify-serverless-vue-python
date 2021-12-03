@@ -25,3 +25,13 @@ vue add vuex
 vue add tailwind 
 ```
 
+# 4. Install AWS Amplify dependency for UI #
+```js
+npm install aws-amplify @aws-amplify/ui-components
+```
+- Reference: https://docs.amplify.aws/start/getting-started/setup/q/integration/vue/#initialize-a-new-backend
+- Make sure to run command:
+```js 
+amplify push -y
+```
+to make amplify available for UI 
