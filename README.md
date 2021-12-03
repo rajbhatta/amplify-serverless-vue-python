@@ -37,13 +37,16 @@ amplify push -y
 to make amplify available for UI
 
 # 5. Architecture diagrams #
-## 5.1 Currently AWS cloud design ##
+## 5.1 Current AWS cloud design ##
 <img src="Snapshots/current-design.png"/>
 
 ## 5.2 Alternative AWS cloud design ##
 <img src="Snapshots/alternative-design.png"/>
 
-# 6. Snapshots #
+# 6. API server flow design #
+<img src="Snapshots/api-design.png"/>
+
+# 7. Snapshots #
 <img src="Snapshots/img1.png"/>
 <img src="Snapshots/img2.png"/>
 
