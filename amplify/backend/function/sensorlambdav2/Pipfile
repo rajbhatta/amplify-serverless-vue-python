@@ -11,6 +11,8 @@ aws-wsgi = "*"
 boto3 = "*"
 flask = "*"
 flask-cors = "*"
+psycopg2-binary = "*"
+sqlalchemy = "*"
 
 [requires]
 python_version = "3.8"

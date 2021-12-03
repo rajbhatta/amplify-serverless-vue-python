@@ -1,1 +1,1 @@
-{ "test": "event" }
+{ "httpMethod": "POST", "path":"/sensorsv2","queryStringParameters":"{}"}
