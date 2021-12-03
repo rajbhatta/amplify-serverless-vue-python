@@ -1,0 +1,69 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-equipmentapi-dev-01537-authRole",
+      "UnauthRoleArn": "arn:aws:iam::328587249661:role/amplify-equipmentapi-dev-01537-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::328587249661:role/amplify-equipmentapi-dev-01537-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-equipmentapi-dev-01537-deployment",
+      "UnauthRoleName": "amplify-equipmentapi-dev-01537-unauthRole",
+      "StackName": "amplify-equipmentapi-dev-01537",
+      "StackId": "arn:aws:cloudformation:us-west-1:328587249661:stack/amplify-equipmentapi-dev-01537/34372850-5411-11ec-90b8-0215fde01e6f",
+      "AmplifyAppId": "dorvzu4bsg4r3"
+    }
+  },
+  "function": {
+    "sensorlambdav3": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2021-12-03T08:20:15.138Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2021-12-03T08:20:19.393Z",
+      "distZipFilename": "sensorlambdav3-356a582f723661456b56-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-equipmentapi-dev-01537-deployment",
+        "s3Key": "amplify-builds/sensorlambdav3-356a582f723661456b56-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-equipmentapi-dev-01537-deployment/amplify-cfn-templates/function/sensorlambdav3-cloudformation-template.json",
+        "logicalId": "functionsensorlambdav3"
+      },
+      "lastPushTimeStamp": "2021-12-03T08:22:26.534Z",
+      "output": {
+        "Region": "us-west-1",
+        "Arn": "arn:aws:lambda:us-west-1:328587249661:function:sensorlambdav3-dev",
+        "Name": "sensorlambdav3-dev",
+        "LambdaExecutionRole": "equipmentapiLambdaRole1f56f018-dev"
+      },
+      "lastPushDirHash": "aBOif/el3kI3/YnD+67iEdYgigg="
+    }
+  },
+  "api": {
+    "equipmentapi": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "sensorlambdav3",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-equipmentapi-dev-01537-deployment/amplify-cfn-templates/api/equipmentapi-cloudformation-template.json",
+        "logicalId": "apiequipmentapi"
+      },
+      "lastPushTimeStamp": "2021-12-03T08:22:26.534Z",
+      "output": {
+        "ApiName": "equipmentapi",
+        "RootUrl": "https://cvsg7g3cud.execute-api.us-west-1.amazonaws.com/dev",
+        "ApiId": "cvsg7g3cud"
+      },
+      "lastPushDirHash": "pJIq3pozfE1haGirU4a5fmQQLLw="
+    }
+  }
+}
