@@ -36,8 +36,14 @@ amplify push -y
 ```
 to make amplify available for UI
 
+# 5. Architecture diagrams #
+## 5.1 Currently adopted design ##
+<img src="Snapshots/current-design.png"/>
 
-# Snapshots #
+## 5.2 Alternative design ##
+<img src="Snapshots/alternative-design.png"/>
+
+# 6. Snapshots #
 <img src="Snapshots/img1.png"/>
 <img src="Snapshots/img2.png"/>
 
