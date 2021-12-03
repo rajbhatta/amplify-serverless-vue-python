@@ -22,10 +22,15 @@ logger = logging.getLogger()
 def create_customer():
     try:
         request_json = request.get_json()
-        request_hex_id = request_json.get('hexid')
-        request_name = request_json.get('name')
-        request_temperature = request_json.get('temperature')
-        request_location = request_json.get('location')
+        #request_hex_id = request_json.get('hexid')
+        #request_name = request_json.get('name')
+        #request_temperature = request_json.get('temperature')
+        #request_location = request_json.get('location')
+
+        request_hex_id = '0x123'
+        request_name = 'test name'
+        request_temperature = 15
+        request_location = 'Surrey'
     
         db_handler = DbHandler(logger)
         db_session = db_handler.get_orm_db_session();
