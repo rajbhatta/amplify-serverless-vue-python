@@ -18,7 +18,6 @@ export default createStore({
   actions: {
     async submitsensor(sensor) {
       try {
-        this.state.sensors.push(sensor)
         const response = await postsensor(sensor)
         this.commit("SAVE_SENSOR_INVOKED", response)
       } catch (error) {
