@@ -11,13 +11,14 @@ export default createStore({
       console.log(response)
     },
     GET_SENSOR_INVOKED(data) {
+       /* todo: write commit message here */
       console.log(data)
     }
   },
   actions: {
     async submitsensor(sensor) {
       try {
-        sensor = { ...sensor }
+        this.state.sensors.push(sensor)
         const response = await postsensor(sensor)
         this.commit("SAVE_SENSOR_INVOKED", response)
       } catch (error) {
