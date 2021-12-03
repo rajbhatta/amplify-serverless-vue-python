@@ -10,6 +10,7 @@
             <label for="hexId" class="mr-2">HexId</label>
             <input
               type="text"
+              v-model="sensor.hexid"
               class="
                 w-full
                 border-2 border-gray-400
@@ -25,6 +26,7 @@
             <label for="hexId" class="mr-2">Name</label>
             <input
               type="text"
+              v-model="sensor.name"
               class="
                 w-full
                 border-2 border-gray-400
@@ -40,6 +42,7 @@
             <label for="hexId" class="mr-2">Location</label>
             <input
               type="text"
+              v-model="sensor.location"
               class="
                 w-full
                 border-2 border-gray-400
@@ -55,6 +58,7 @@
             <label for="hexId" class="mr-2">Temperature</label>
             <input
               type="text"
+              v-model="sensor.temperature"
               class="
                 w-full
                 border-2 border-gray-400
@@ -66,7 +70,13 @@
               placeholder="Please enter sensor temperature.."
             />
           </div>
-          <button type="button" class="block w-full bg-green-400 p-4 rounded" v-on:Click="submitForm()">Submit</button>
+          <button
+            type="button"
+            class="block w-full bg-green-400 p-4 rounded"
+            v-on:Click="submitForm()"
+          >
+            Submit
+          </button>
         </form>
       </div>
       <!-- end of form -->
@@ -75,14 +85,24 @@
 </template>
 
 <script>
-import {mapActions } from 'vuex'
+import { mapActions} from "vuex";
 
 export default {
-    methods: {
-        ...mapActions(['submitsensor','getsensors']),
-        submitForm() {
-          this.submitsensor()
-        }
-    }
+  data() {
+    return {
+      sensor: {
+        hexid: "",
+        name: "",
+        location: "",
+        temperature: "",
+      },
+    };
+  },
+  methods: {
+    ...mapActions(["submitsensor", "getsensors"]),
+    submitForm() {
+      this.submitsensor(this.sensor);
+    },
+  }
 };
 </script>

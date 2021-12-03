@@ -27,7 +27,7 @@
                   Total Sensors Record Counts
                 </h5>
                 <h3 class="font-bold text-3xl">
-                  15
+                  {{loadSensorInfo().length}}
                   <span class="text-green-500"
                     ><i class="fas fa-caret-up"></i
                   ></span>
@@ -59,7 +59,7 @@
               <div class="flex-1 text-right md:text-center">
                 <h5 class="font-bold uppercase text-gray-600">Total Sensors</h5>
                 <h3 class="font-bold text-3xl">
-                  5
+                  {{loadSensorInfo().length}}
                   <span class="text-pink-500"
                     ><i class="fas fa-exchange-alt"></i
                   ></span>
@@ -135,27 +135,27 @@
               <th class="px-4 py-3">Sensor Name</th>
               <th class="px-4 py-3">Temperature (°C)</th>
               <th class="px-4 py-3">Status</th>
-              <th class="px-4 py-3">Created At</th>
+              <th class="px-4 py-3">Location</th>
             </tr>
           </thead>
           <tbody
             class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
           >
-            <tr class="text-gray-700 dark:text-gray-400">
+            <tr class="text-gray-700 dark:text-gray-400" v-for="sensor in loadSensorInfo()" v-bind:key="sensor.hexid">
               <td class="px-4 py-3">
                 <div class="flex items-center text-sm">
                   <div>
                     <p class="font-semibold">
-                      <router-link :to="'/sensors/' + 1"> 0xACAC </router-link>
+                      <router-link :to="'/sensors/' + 1"> {{sensor.hexid}} </router-link>
                     </p>
                   </div>
                 </div>
               </td>
               <td class="px-4 py-3">
-                <div class="flex items-center text-sm">Test Sensor Name</div>
+                <div class="flex items-center text-sm">{{sensor.name}}</div>
               </td>
               <td class="px-4 py-3">
-                <div class="flex items-center text-sm">15</div>
+                <div class="flex items-center text-sm">{{sensor.temperature}}</div>
               </td>
               <td class="px-4 py-3">
                 <div class="flex items-center text-sm">
@@ -177,7 +177,7 @@
               </td>
 
               <td class="px-4 py-3">
-                <div class="flex items-center text-sm">6/10/2020</div>
+                <div class="flex items-center text-sm">{{sensor.location}}</div>
               </td>
             </tr>
           </tbody>
@@ -189,8 +189,22 @@
 </template>
 
 <script>
+import { mapActions} from "vuex";
+
 export default {
-  name: "Home",
-  components: {},
+  data() {
+    return {
+      
+    };
+  },
+  methods: {
+    ...mapActions(["getsensors"]),
+    loadSensorInfo(){
+      return this.$store.state.sensors;
+    }
+  },
+  async mounted() {
+    this.getsensors();
+  }
 };
 </script>
