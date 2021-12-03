@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-sensorapi-dev-181117-authRole",
+      "UnauthRoleArn": "arn:aws:iam::328587249661:role/amplify-sensorapi-dev-181117-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::328587249661:role/amplify-sensorapi-dev-181117-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-sensorapi-dev-181117-deployment",
+      "UnauthRoleName": "amplify-sensorapi-dev-181117-unauthRole",
+      "StackName": "amplify-sensorapi-dev-181117",
+      "StackId": "arn:aws:cloudformation:us-west-1:328587249661:stack/amplify-sensorapi-dev-181117/50204520-53de-11ec-bdb3-0297cbc4f3a1",
+      "AmplifyAppId": "dhd5bfw9ox83u"
+    },
+    "categories": {
+      "function": {
+        "sensorlambda": {
+          "deploymentBucketName": "amplify-sensorapi-dev-181117-deployment",
+          "s3Key": "amplify-builds/sensorlambda-49596d4e32654b4d4f75-build.zip"
+        }
+      }
+    }
+  }
+}
