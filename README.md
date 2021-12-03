@@ -35,3 +35,17 @@ npm install aws-amplify @aws-amplify/ui-components
 amplify push -y
 ```
 to make amplify available for UI
+
+
+# Snapshots #
+<img src="Snapshots/img1.png"/>
+<img src="Snapshots/img2.png"/>
+
+<img src="Snapshots/img7.png"/>
+<img src="Snapshots/img8.png"/>
+<img src="Snapshots/img9.png"/>
+
+<img src="Snapshots/img4.png"/>
+<img src="Snapshots/img3.png"/>
+<img src="Snapshots/img5.png"/>
+<img src="Snapshots/img6.png"/>
