@@ -66,10 +66,23 @@
               placeholder="Please enter sensor temperature.."
             />
           </div>
-          <button class="block w-full bg-green-400 p-4 rounded">Submit</button>
+          <button type="button" class="block w-full bg-green-400 p-4 rounded" v-on:Click="submitForm()">Submit</button>
         </form>
       </div>
       <!-- end of form -->
     </div>
   </div>
 </template>
+
+<script>
+import {mapActions } from 'vuex'
+
+export default {
+    methods: {
+        ...mapActions(['submitsensor','getsensors']),
+        submitForm() {
+          this.submitsensor()
+        }
+    }
+};
+</script>
